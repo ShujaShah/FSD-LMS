@@ -5,8 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as dynamoose from 'dynamoose';
-
-/** ROUTE IMPORTS */
+import router from './routes';
 
 /** CONFIGURATIONS */
 dotenv.config();
@@ -26,9 +25,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
 app.use(cors());
 
 /** Routes */
-app.get('/', (req, res) => {
-  res.send('hello world');
-});
+app.use('api/v1', router);
 
 /** SERVER */
 const port = process.env.PORT || 4000;
