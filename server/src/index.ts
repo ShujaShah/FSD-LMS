@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import * as dynamoose from 'dynamoose';
 import router from './routes';
+import { Request, Response } from 'express';
 
 /** CONFIGURATIONS */
 dotenv.config();
@@ -25,7 +26,11 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
 app.use(cors());
 
 /** Routes */
-app.use('api/v1', router);
+app.use('/api/v1', router);
+
+app.use('health-check', (req: Request, res: Response) => {
+  res.send({ message: 'Server is up and running' });
+});
 
 /** SERVER */
 const port = process.env.PORT || 4000;
