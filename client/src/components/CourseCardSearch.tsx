@@ -24,19 +24,23 @@ const CourseCardSearch = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw) className='course-card-search__image"
         />
       </div>
-      <div className="course-card-search__title">
-        {course.title}
-        <p className="course-card-search__description">{course.description}</p>
-      </div>
-      <div className="mt-2">
-        <p className="course-card-search__teacher">By{course.teacherName}</p>
-        <div className="course-card-search__footer">
-          <span className="course-card-search__price">
-            {formatPrice(course.price)}
-          </span>
-          <span className="course-card-search__enrollment">
-            {course.enrollments?.length} Enrolled
-          </span>
+      <div className="course-card-search__content">
+        <div className="course-card-search__title">
+          {course.title}
+          <p className="course-card-search__description">
+            {course.description}
+          </p>
+        </div>
+        <div className="mt-2">
+          <p className="course-card-search__teacher">By{course.teacherName}</p>
+          <div className="course-card-search__footer">
+            <span className="course-card-search__price">
+              {formatPrice(course.price)}
+            </span>
+            <span className="course-card-search__enrollment">
+              {course.enrollments?.length} Enrolled
+            </span>
+          </div>
         </div>
       </div>
     </div>
