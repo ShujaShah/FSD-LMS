@@ -23,7 +23,14 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
-app.use(cors());
+
+/** CORS */
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    credentials: true,
+  })
+);
 
 /** Routes */
 app.use('/api/v1', router);
