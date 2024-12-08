@@ -9,8 +9,10 @@ import { useGetCoursesQuery } from '@/state/api';
 import { useRouter } from 'next/navigation';
 import CourseCardSearch from '@/components/CourseCardSearch';
 import LoadingSkeleton from './LoadingSkeleton';
+import { useUser } from '@clerk/nextjs';
 
 const Landing = () => {
+  const user = useUser();
   const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3 });
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
