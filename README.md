@@ -28,3 +28,7 @@ Now Access dynamoDB locally:
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
+To Use the Seeded Data, Navigate to the Server and use the following command:
+```
+npm run seed
+```
