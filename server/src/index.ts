@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import * as dynamoose from 'dynamoose';
 import router from './routes';
 import { Request, Response } from 'express';
+import { createClerkClient } from '@clerk/express';
 
 /** CONFIGURATIONS */
 dotenv.config();
@@ -15,6 +16,10 @@ const isProduction = process.env.NODE_ENV === 'production';
 if (!isProduction) {
   dynamoose.aws.ddb.local();
 }
+
+export const clerkClient= createClerkClient({
+  secretKey: process.env.CLERK_SECRET_KEY
+})
 
 const app = express();
 app.use(express.json());
