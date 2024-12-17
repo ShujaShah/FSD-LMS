@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import * as dynamoose from 'dynamoose';
 import router from './routes';
 import { Request, Response } from 'express';
-import { createClerkClient } from '@clerk/express';
+import { clerkMiddleware, createClerkClient } from '@clerk/express';
 
 /** CONFIGURATIONS */
 dotenv.config();
@@ -28,6 +28,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
+app.use(clerkMiddleware()); 
 
 /** CORS */
 app.use(
