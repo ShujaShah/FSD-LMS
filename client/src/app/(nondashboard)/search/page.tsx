@@ -37,7 +37,7 @@ const Search = () => {
   };
 
   const handleEnrollNow = (courseId: string) => {
-    router.push(`/checkout?step=1&id=${courseId}$showsignup=false`);
+    router.push(`/checkout?step=1&id=${courseId}&showsignup=false`);
   };
 
   if (isError || !courses) <div>Failed to fetch courses</div>;
