@@ -1,21 +1,18 @@
 'use client';
 
-import CourseCardSearch from '@/components/CourseCardSearch';
 import Loading from '@/components/Loading';
 import { useGetCoursesQuery } from '@/state/api';
-import { motion } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import CourseCardSearch from '@/components/CourseCardSearch';
 import SelectedCourse from './SelectedCourse';
 
 const Search = () => {
-  const search = useSearchParams();
-  const id = search.get('id');
-
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
-
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -30,17 +27,20 @@ const Search = () => {
   }, [courses, id]);
 
   if (isLoading) return <Loading />;
+  if (isError || !courses) return <div>Failed to fetch courses</div>;
 
   const handleCourseSelect = (course: Course) => {
     setSelectedCourse(course);
-    router.push(`/search?id=${course.courseId} `);
+    router.push(`/search?id=${course.courseId}`, {
+      scroll: false,
+    });
   };
 
   const handleEnrollNow = (courseId: string) => {
-    router.push(`/checkout?step=1&id=${courseId}&showsignup=false`);
+    router.push(`/checkout?step=1&id=${courseId}&showSignUp=false`, {
+      scroll: false,
+    });
   };
-
-  if (isError || !courses) <div>Failed to fetch courses</div>;
 
   return (
     <motion.div
@@ -49,8 +49,8 @@ const Search = () => {
       transition={{ duration: 0.5 }}
       className="landing"
     >
-      <h1 className="search__title">List of Available Courses</h1>
-      <h2 className="search__subtitle">{courses?.length} courses available</h2>
+      <h1 className="search__title">List of available courses</h1>
+      <h2 className="search__subtitle">{courses.length} courses avaiable</h2>
       <div className="search__content">
         <motion.div
           initial={{ y: 40, opacity: 0 }}
@@ -58,7 +58,7 @@ const Search = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="search__courses-grid"
         >
-          {courses?.map((course) => (
+          {courses.map((course) => (
             <CourseCardSearch
               key={course.courseId}
               course={course}
@@ -67,6 +67,7 @@ const Search = () => {
             />
           ))}
         </motion.div>
+
         {selectedCourse && (
           <motion.div
             initial={{ y: 40, opacity: 0 }}
