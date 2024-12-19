@@ -1,4 +1,5 @@
-Download DynamoDB from 
+Download DynamoDB from
+
 ```
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
 ```
@@ -10,25 +11,38 @@ java -Djava.library.path=//Users/shshah/Downloads/dynamodb-local/DynamoDBLocal_l
 ```
 
 To access dynamodb programatically, you need to install aws-cli
+
 ```
 `https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 ```
 
 To configure AWS, run the command:
+
 ```
 aws configure
 ```
+
 ```
 AWS Access Key ID: fakeMyKeyId
 AWS Secret Access Key: fakeSecretAccessKey
 Default Region Name: fakeRegion
 Default ouptput: json
 ```
+
 Now Access dynamoDB locally:
+
 ```
 aws dynamodb list-tables --endpoint-url http://localhost:8000
 ```
+
 To Use the Seeded Data, Navigate to the Server and use the following command:
+
 ```
 npm run seed
+```
+
+Use the following dummy CC Number for the purchasing of course, Note that due to regulatory the payments are not working
+
+```
+4000 0035 6000 0008
 ```
