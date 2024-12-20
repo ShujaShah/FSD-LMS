@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { Button } from '@/components/ui/button';
-import { Trash2, Edit, Plus, GripVertical } from 'lucide-react';
-import { useAppDispatch, useAppSelector } from '@/state/redux';
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import { Button } from "@/components/ui/button";
+import { Trash2, Edit, Plus, GripVertical } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
 import {
   setSections,
   deleteSection,
   deleteChapter,
   openSectionModal,
   openChapterModal,
-} from '@/state';
+} from "@/state";
 
 export default function DroppableComponent() {
   const dispatch = useAppDispatch();
@@ -59,8 +59,8 @@ export default function DroppableComponent() {
                     {...draggableProvider.draggableProps}
                     className={`droppable-section ${
                       sectionIndex % 2 === 0
-                        ? 'droppable-section--even'
-                        : 'droppable-section--odd'
+                        ? "droppable-section--even"
+                        : "droppable-section--odd"
                     }`}
                   >
                     <SectionHeader
@@ -205,8 +205,8 @@ const ChapterItem = ({
       {...draggableProvider.dragHandleProps}
       className={`droppable-chapter ${
         chapterIndex % 2 === 1
-          ? 'droppable-chapter--odd'
-          : 'droppable-chapter--even'
+          ? "droppable-chapter--odd"
+          : "droppable-chapter--even"
       }`}
     >
       <div className="droppable-chapter__title">

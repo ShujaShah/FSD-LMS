@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { courseCategories } from '@/lib/utils';
+} from "@/components/ui/select";
+import { courseCategories } from "@/lib/utils";
 
 const Toolbar = ({ onSearch, onCategoryChange }: ToolbarProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);

@@ -1,16 +1,16 @@
-import { CustomFormField } from '@/components/CustomFormField';
-import CustomModal from '@/components/CustomModal';
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
-import { SectionFormData, sectionSchema } from '@/lib/schemas';
-import { addSection, closeSectionModal, editSection } from '@/state';
-import { useAppDispatch, useAppSelector } from '@/state/redux';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { X } from 'lucide-react';
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { v4 as uuidv4 } from 'uuid';
+import { CustomFormField } from "@/components/CustomFormField";
+import CustomModal from "@/components/CustomModal";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { SectionFormData, sectionSchema } from "@/lib/schemas";
+import { addSection, closeSectionModal, editSection } from "@/state";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { X } from "lucide-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid";
 
 const SectionModal = () => {
   const dispatch = useAppDispatch();
@@ -24,8 +24,8 @@ const SectionModal = () => {
   const methods = useForm<SectionFormData>({
     resolver: zodResolver(sectionSchema),
     defaultValues: {
-      title: '',
-      description: '',
+      title: "",
+      description: "",
     },
   });
 
@@ -37,8 +37,8 @@ const SectionModal = () => {
       });
     } else {
       methods.reset({
-        title: '',
-        description: '',
+        title: "",
+        description: "",
       });
     }
   }, [section, methods]);

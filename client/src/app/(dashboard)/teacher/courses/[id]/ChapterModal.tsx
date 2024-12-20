@@ -1,6 +1,6 @@
-import { CustomFormField } from '@/components/CustomFormField';
-import CustomModal from '@/components/CustomModal';
-import { Button } from '@/components/ui/button';
+import { CustomFormField } from "@/components/CustomFormField";
+import CustomModal from "@/components/CustomModal";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,17 +8,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { ChapterFormData, chapterSchema } from '@/lib/schemas';
-import { addChapter, closeChapterModal, editChapter } from '@/state';
-import { useAppDispatch, useAppSelector } from '@/state/redux';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { X } from 'lucide-react';
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { v4 as uuidv4 } from 'uuid';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ChapterFormData, chapterSchema } from "@/lib/schemas";
+import { addChapter, closeChapterModal, editChapter } from "@/state";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { X } from "lucide-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { v4 as uuidv4 } from "uuid";
 
 const ChapterModal = () => {
   const dispatch = useAppDispatch();
@@ -37,9 +37,9 @@ const ChapterModal = () => {
   const methods = useForm<ChapterFormData>({
     resolver: zodResolver(chapterSchema),
     defaultValues: {
-      title: '',
-      content: '',
-      video: '',
+      title: "",
+      content: "",
+      video: "",
     },
   });
 
@@ -48,13 +48,13 @@ const ChapterModal = () => {
       methods.reset({
         title: chapter.title,
         content: chapter.content,
-        video: chapter.video || '',
+        video: chapter.video || "",
       });
     } else {
       methods.reset({
-        title: '',
-        content: '',
-        video: '',
+        title: "",
+        content: "",
+        video: "",
       });
     }
   }, [chapter, methods]);
@@ -70,7 +70,7 @@ const ChapterModal = () => {
       chapterId: chapter?.chapterId || uuidv4(),
       title: data.title,
       content: data.content,
-      type: data.video ? 'Video' : 'Text',
+      type: data.video ? "Video" : "Text",
       video: data.video,
     };
 
@@ -146,9 +146,9 @@ const ChapterModal = () => {
                         }}
                         className="border-none bg-customgreys-darkGrey py-2 cursor-pointer"
                       />
-                      {typeof value === 'string' && value && (
+                      {typeof value === "string" && value && (
                         <div className="my-2 text-sm text-gray-600">
-                          Current video: {value.split('/').pop()}
+                          Current video: {value.split("/").pop()}
                         </div>
                       )}
                       {value instanceof File && (

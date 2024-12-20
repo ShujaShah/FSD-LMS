@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Button } from '@/components/ui/button';
-import { Check } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
+import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
+import Link from "next/link";
+import React from "react";
 
 const CompletionPage = () => {
   return (
@@ -19,7 +19,7 @@ const CompletionPage = () => {
       </div>
       <div className="completion__support">
         <p>
-          Need help? Contact our{' '}
+          Need help? Contact our{" "}
           <Button variant="link" asChild className="p-0 m-0 text-primary-700">
             <a href="mailto:support@example.com">customer support</a>
           </Button>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CustomModal = ({ isOpen, onClose, children }: CustomFixedModalProps) => {
   if (!isOpen) return null;

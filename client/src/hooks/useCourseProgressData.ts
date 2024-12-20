@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useState } from "react";
+import { useParams } from "next/navigation";
 import {
   useGetCourseQuery,
   useGetUserCourseProgressQuery,
   useUpdateUserCourseProgressMutation,
-} from '@/state/api';
-import { useUser } from '@clerk/nextjs';
+} from "@/state/api";
+import { useUser } from "@clerk/nextjs";
 
 export const useCourseProgressData = () => {
   const { courseId, chapterId } = useParams();
@@ -14,7 +14,7 @@ export const useCourseProgressData = () => {
   const [updateProgress] = useUpdateUserCourseProgressMutation();
 
   const { data: course, isLoading: courseLoading } = useGetCourseQuery(
-    (courseId as string) ?? '',
+    (courseId as string) ?? "",
     {
       skip: !courseId,
     }
@@ -23,8 +23,8 @@ export const useCourseProgressData = () => {
   const { data: userProgress, isLoading: progressLoading } =
     useGetUserCourseProgressQuery(
       {
-        userId: user?.id ?? '',
-        courseId: (courseId as string) ?? '',
+        userId: user?.id ?? "",
+        courseId: (courseId as string) ?? "",
       },
       {
         skip: !isLoaded || !user || !courseId,
@@ -76,7 +76,7 @@ export const useCourseProgressData = () => {
 
     updateProgress({
       userId: user.id,
-      courseId: (courseId as string) ?? '',
+      courseId: (courseId as string) ?? "",
       progressData: {
         sections: updatedSections,
       },

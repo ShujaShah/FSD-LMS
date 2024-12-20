@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import Loading from '@/components/Loading';
-import { useGetCoursesQuery } from '@/state/api';
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import CourseCardSearch from '@/components/CourseCardSearch';
-import SelectedCourse from './SelectedCourse';
+import Loading from "@/components/Loading";
+import { useGetCoursesQuery } from "@/state/api";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import CourseCardSearch from "@/components/CourseCardSearch";
+import SelectedCourse from "./SelectedCourse";
 
 const Search = () => {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const router = useRouter();
@@ -47,7 +47,7 @@ const Search = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="landing"
+      className="search"
     >
       <h1 className="search__title">List of available courses</h1>
       <h2 className="search__subtitle">{courses.length} courses avaiable</h2>

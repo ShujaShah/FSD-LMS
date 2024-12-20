@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { FileText } from 'lucide-react';
+} from "@/components/ui/accordion";
+import { FileText } from "lucide-react";
 
 const AccordionSections = ({ sections }: AccordionSectionsProps) => {
   return (

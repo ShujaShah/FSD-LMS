@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import Header from '@/components/Header';
-import Loading from '@/components/Loading';
-import TeacherCourseCard from '@/components/TeacherCourseCard';
-import Toolbar from '@/components/Toolbar';
-import { Button } from '@/components/ui/button';
+import Header from "@/components/Header";
+import Loading from "@/components/Loading";
+import TeacherCourseCard from "@/components/TeacherCourseCard";
+import Toolbar from "@/components/Toolbar";
+import { Button } from "@/components/ui/button";
 import {
   useCreateCourseMutation,
   useDeleteCourseMutation,
   useGetCoursesQuery,
-} from '@/state/api';
-import { useUser } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from 'react';
+} from "@/state/api";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import React, { useMemo, useState } from "react";
 
 const Courses = () => {
   const router = useRouter();
@@ -21,13 +21,13 @@ const Courses = () => {
     data: courses,
     isLoading,
     isError,
-  } = useGetCoursesQuery({ category: 'all' });
+  } = useGetCoursesQuery({ category: "all" });
 
   const [createCourse] = useCreateCourseMutation();
   const [deleteCourse] = useDeleteCourseMutation();
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const filteredCourses = useMemo(() => {
     if (!courses) return [];
@@ -37,7 +37,7 @@ const Courses = () => {
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
       const matchesCategory =
-        selectedCategory === 'all' || course.category === selectedCategory;
+        selectedCategory === "all" || course.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [courses, searchTerm, selectedCategory]);
@@ -49,7 +49,7 @@ const Courses = () => {
   };
 
   const handleDelete = async (course: Course) => {
-    if (window.confirm('Are you sure you want to delete this course?')) {
+    if (window.confirm("Are you sure you want to delete this course?")) {
       await deleteCourse(course.courseId).unwrap();
     }
   };
@@ -59,7 +59,7 @@ const Courses = () => {
 
     const result = await createCourse({
       teacherId: user.id,
-      teacherName: user.fullName || 'Unknown Teacher',
+      teacherName: user.fullName || "Unknown Teacher",
     }).unwrap();
     router.push(`/teacher/courses/${result.courseId}`, {
       scroll: false,

@@ -1,24 +1,56 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useCarousel } from '@/hooks/useCarousel';
-import { useGetCoursesQuery } from '@/state/api';
-import { useRouter } from 'next/navigation';
-import CourseCardSearch from '@/components/CourseCardSearch';
-import LoadingSkeleton from './LoadingSkeleton';
-import { useUser } from '@clerk/nextjs';
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { useCarousel } from "@/hooks/useCarousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useGetCoursesQuery } from "@/state/api";
+import { useRouter } from "next/navigation";
+import CourseCardSearch from "@/components/CourseCardSearch";
+import { useUser } from "@clerk/nextjs";
+
+const LoadingSkeleton = () => {
+  return (
+    <div className="landing-skeleton">
+      <div className="landing-skeleton__hero">
+        <div className="landing-skeleton__hero-content">
+          <Skeleton className="landing-skeleton__title" />
+          <Skeleton className="landing-skeleton__subtitle" />
+          <Skeleton className="landing-skeleton__subtitle-secondary" />
+          <Skeleton className="landing-skeleton__button" />
+        </div>
+        <Skeleton className="landing-skeleton__hero-image" />
+      </div>
+
+      <div className="landing-skeleton__featured">
+        <Skeleton className="landing-skeleton__featured-title" />
+        <Skeleton className="landing-skeleton__featured-description" />
+
+        <div className="landing-skeleton__tags">
+          {[1, 2, 3, 4, 5].map((_, index) => (
+            <Skeleton key={index} className="landing-skeleton__tag" />
+          ))}
+        </div>
+
+        <div className="landing-skeleton__courses">
+          {[1, 2, 3, 4].map((_, index) => (
+            <Skeleton key={index} className="landing-skeleton__course-card" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Landing = () => {
-  const user = useUser();
   const router = useRouter();
   const currentImage = useCarousel({ totalImages: 3 });
   const { data: courses, isLoading, isError } = useGetCoursesQuery({});
 
-  const handleCourseClick = (courseid: string) => {
-    router.push(`/search?id=${courseid}`, {
+  const handleCourseClick = (courseId: string) => {
+    router.push(`/search?id=${courseId}`, {
       scroll: false,
     });
   };
@@ -41,8 +73,7 @@ const Landing = () => {
         <div className="landing__hero-content">
           <h1 className="landing__title">Courses</h1>
           <p className="landing__description">
-            {' '}
-            This is a list of the courses you can enroll in.
+            This is the list of the courses you can enroll in.
             <br />
             Courses when you need them and want them.
           </p>
@@ -53,16 +84,16 @@ const Landing = () => {
           </div>
         </div>
         <div className="landing__hero-images">
-          {['/hero1.jpg', '/hero2.jpg', '/hero3.jpg'].map((src, index) => (
+          {["/hero1.jpg", "/hero2.jpg", "/hero3.jpg"].map((src, index) => (
             <Image
               key={src}
               src={src}
               alt={`Hero Banner ${index + 1}`}
               fill
               priority={index === currentImage}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw))"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={`landing__hero-image ${
-                index === currentImage ? 'landing__hero-image--active' : ''
+                index === currentImage ? "landing__hero-image--active" : ""
               }`}
             />
           ))}
@@ -77,20 +108,25 @@ const Landing = () => {
       >
         <h2 className="landing__featured-title">Featured Courses</h2>
         <p className="landing__featured-description">
-          From beginner to advanced, we have the right courses for you
+          From beginner to advanced, in all industries, we have the right
+          courses just for you and preparing your entire journey for learning
+          and making the most.
         </p>
+
         <div className="landing__tags">
           {[
-            'web develpment',
-            'enterprise IT',
-            'data science',
-            'machine learning',
+            "web development",
+            "enterprise IT",
+            "react nextjs",
+            "javascript",
+            "backend development",
           ].map((tag, index) => (
             <span key={index} className="landing__tag">
               {tag}
             </span>
           ))}
         </div>
+
         <div className="landing__courses">
           {courses &&
             courses.slice(0, 4).map((course, index) => (
@@ -99,7 +135,7 @@ const Landing = () => {
                 initial={{ y: 50, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 }}
-                viewport={{ amount: 0.3 }}
+                viewport={{ amount: 0.4 }}
               >
                 <CourseCardSearch
                   course={course}

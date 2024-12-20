@@ -1,7 +1,7 @@
-import AccordionSections from '@/components/AccordionSections';
-import { Button } from '@/components/ui/button';
-import { formatPrice } from '@/lib/utils';
-import React from 'react';
+import AccordionSections from "@/components/AccordionSections";
+import { Button } from "@/components/ui/button";
+import { formatPrice } from "@/lib/utils";
+import React from "react";
 
 const SelectedCourse = ({ course, handleEnrollNow }: SelectedCourseProps) => {
   return (
@@ -9,7 +9,7 @@ const SelectedCourse = ({ course, handleEnrollNow }: SelectedCourseProps) => {
       <div>
         <h3 className="selected-course__title">{course.title}</h3>
         <p className="selected-course__author">
-          By {course.teacherName} |{' '}
+          By {course.teacherName} |{" "}
           <span className="selected-course__enrollment-count">
             {course?.enrollments?.length}
           </span>

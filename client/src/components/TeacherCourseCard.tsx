@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { Button } from './ui/button';
-import { Pencil, Trash2 } from 'lucide-react';
+} from "@/components/ui/card";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
+import { Pencil, Trash2 } from "lucide-react";
 
 const TeacherCourseCard = ({
   course,
@@ -21,7 +21,7 @@ const TeacherCourseCard = ({
     <Card className="course-card-teacher group">
       <CardHeader className="course-card-teacher__header">
         <Image
-          src={course.image || '/placeholder.png'}
+          src={course.image || "/placeholder.png"}
           alt={course.title}
           width={370}
           height={150}
@@ -41,13 +41,13 @@ const TeacherCourseCard = ({
           </CardDescription>
 
           <p className="text-sm mb-2">
-            Status:{' '}
+            Status:{" "}
             <span
               className={cn(
-                'font-semibold px-2 py-1 rounded',
-                course.status === 'Published'
-                  ? 'bg-green-500/20 text-green-400'
-                  : 'bg-red-500/20 text-red-400'
+                "font-semibold px-2 py-1 rounded",
+                course.status === "Published"
+                  ? "bg-green-500/20 text-green-400"
+                  : "bg-red-500/20 text-red-400"
               )}
             >
               {course.status}
@@ -57,8 +57,8 @@ const TeacherCourseCard = ({
             <p className="ml-1 mt-1 inline-block text-secondary bg-secondary/10 text-sm font-normal">
               <span className="font-bold text-white-100">
                 {course.enrollments.length}
-              </span>{' '}
-              Student{course.enrollments.length > 1 ? 's' : ''} Enrolled
+              </span>{" "}
+              Student{course.enrollments.length > 1 ? "s" : ""} Enrolled
             </p>
           )}
         </div>

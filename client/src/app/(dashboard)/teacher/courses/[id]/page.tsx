@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { CustomFormField } from '@/components/CustomFormField';
-import Header from '@/components/Header';
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
-import { courseSchema } from '@/lib/schemas';
+import { CustomFormField } from "@/components/CustomFormField";
+import Header from "@/components/Header";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { courseSchema } from "@/lib/schemas";
 import {
   centsToDollars,
   createCourseFormData,
   uploadAllVideos,
-} from '@/lib/utils';
-import { openSectionModal, setSections } from '@/state';
+} from "@/lib/utils";
+import { openSectionModal, setSections } from "@/state";
 import {
   useGetCourseQuery,
   useUpdateCourseMutation,
   useGetUploadVideoUrlMutation,
-} from '@/state/api';
-import { useAppDispatch, useAppSelector } from '@/state/redux';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowLeft, Plus } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import DroppableComponent from './Droppable';
-import ChapterModal from './ChapterModal';
-import SectionModal from './SectionModal';
+} from "@/state/api";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, Plus } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import DroppableComponent from "./Droppable";
+import ChapterModal from "./ChapterModal";
+import SectionModal from "./SectionModal";
 
 const CourseEditor = () => {
   const router = useRouter();
@@ -40,10 +40,10 @@ const CourseEditor = () => {
   const methods = useForm<CourseFormData>({
     resolver: zodResolver(courseSchema),
     defaultValues: {
-      courseTitle: '',
-      courseDescription: '',
-      courseCategory: '',
-      coursePrice: '0',
+      courseTitle: "",
+      courseDescription: "",
+      courseCategory: "",
+      coursePrice: "0",
       courseStatus: false,
     },
   });
@@ -55,7 +55,7 @@ const CourseEditor = () => {
         courseDescription: course.description,
         courseCategory: course.category,
         coursePrice: centsToDollars(course.price),
-        courseStatus: course.status === 'Published',
+        courseStatus: course.status === "Published",
       });
       dispatch(setSections(course.sections || []));
     }
@@ -78,7 +78,7 @@ const CourseEditor = () => {
 
       refetch();
     } catch (error) {
-      console.error('Failed to update course:', error);
+      console.error("Failed to update course:", error);
     }
   };
 
@@ -87,7 +87,7 @@ const CourseEditor = () => {
       <div className="flex items-center gap-5 mb-5">
         <button
           className="flex items-center border border-customgreys-dirtyGrey rounded-lg p-2 gap-2 cursor-pointer hover:bg-customgreys-dirtyGrey hover:text-white-100 text-customgreys-dirtyGrey"
-          onClick={() => router.push('/teacher/courses', { scroll: false })}
+          onClick={() => router.push("/teacher/courses", { scroll: false })}
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Courses</span>
@@ -103,13 +103,13 @@ const CourseEditor = () => {
               <div className="flex items-center space-x-4">
                 <CustomFormField
                   name="courseStatus"
-                  label={methods.watch('courseStatus') ? 'Published' : 'Draft'}
+                  label={methods.watch("courseStatus") ? "Published" : "Draft"}
                   type="switch"
                   className="flex items-center space-x-2"
                   labelClassName={`text-sm font-medium ${
-                    methods.watch('courseStatus')
-                      ? 'text-green-500'
-                      : 'text-yellow-500'
+                    methods.watch("courseStatus")
+                      ? "text-green-500"
+                      : "text-yellow-500"
                   }`}
                   inputClassName="data-[state=checked]:bg-green-500"
                 />
@@ -117,9 +117,9 @@ const CourseEditor = () => {
                   type="submit"
                   className="bg-primary-700 hover:bg-primary-600"
                 >
-                  {methods.watch('courseStatus')
-                    ? 'Update Published Course'
-                    : 'Save Draft'}
+                  {methods.watch("courseStatus")
+                    ? "Update Published Course"
+                    : "Save Draft"}
                 </Button>
               </div>
             }
@@ -151,12 +151,12 @@ const CourseEditor = () => {
                   type="select"
                   placeholder="Select category here"
                   options={[
-                    { value: 'technology', label: 'Technology' },
-                    { value: 'science', label: 'Science' },
-                    { value: 'mathematics', label: 'Mathematics' },
+                    { value: "technology", label: "Technology" },
+                    { value: "science", label: "Science" },
+                    { value: "mathematics", label: "Mathematics" },
                     {
-                      value: 'Artificial Intelligence',
-                      label: 'Artificial Intelligence',
+                      value: "Artificial Intelligence",
+                      label: "Artificial Intelligence",
                     },
                   ]}
                   initialValue={course?.category}

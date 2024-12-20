@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Loading from '@/components/Loading';
+import Loading from "@/components/Loading";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -15,24 +15,24 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { formatPrice } from '@/lib/utils';
-import { useGetTransactionsQuery } from '@/state/api';
-import { useUser } from '@clerk/nextjs';
-import React, { useState } from 'react';
+} from "@/components/ui/table";
+import { formatPrice } from "@/lib/utils";
+import { useGetTransactionsQuery } from "@/state/api";
+import { useUser } from "@clerk/nextjs";
+import React, { useState } from "react";
 
 const UserBilling = () => {
-  const [paymentType, setPaymentType] = useState('all');
+  const [paymentType, setPaymentType] = useState("all");
   const { user, isLoaded } = useUser();
   const { data: transactions, isLoading: isLoadingTransactions } =
-    useGetTransactionsQuery(user?.id || '', {
+    useGetTransactionsQuery(user?.id || "", {
       skip: !isLoaded || !user,
     });
 
   const filteredData =
     transactions?.filter((transaction) => {
       const matchesTypes =
-        paymentType === 'all' || transaction.paymentProvider === paymentType;
+        paymentType === "all" || transaction.paymentProvider === paymentType;
       return matchesTypes;
     }) || [];
 

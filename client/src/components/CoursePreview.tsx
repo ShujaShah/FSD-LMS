@@ -1,7 +1,7 @@
-import { formatPrice } from '@/lib/utils';
-import Image from 'next/image';
-import React from 'react';
-import AccordionSections from './AccordionSections';
+import { formatPrice } from "@/lib/utils";
+import Image from "next/image";
+import React from "react";
+import AccordionSections from "./AccordionSections";
 
 const CoursePreview = ({ course }: CoursePreviewProps) => {
   const price = formatPrice(course.price);
@@ -10,7 +10,7 @@ const CoursePreview = ({ course }: CoursePreviewProps) => {
       <div className="course-preview__container">
         <div className="course-preview__image-wrapper">
           <Image
-            src={course.image || '/placeholder.png'}
+            src={course.image || "/placeholder.png"}
             alt="Course Preview"
             width={640}
             height={360}

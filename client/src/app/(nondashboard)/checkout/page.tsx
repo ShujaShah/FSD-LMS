@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Loading from '@/components/Loading';
-import WizardStepper from '@/components/WizzardStepper';
-import { useCheckoutNavigation } from '@/hooks/useCheckoutNavigation';
-import { useUser } from '@clerk/nextjs';
-import React from 'react';
-import CheckoutDetailsPage from './details';
-import PaymentPage from './payment';
-import CompletionPage from './completion';
+import Loading from "@/components/Loading";
+import WizardStepper from "@/components/WizardStepper";
+import { useCheckoutNavigation } from "@/hooks/useCheckoutNavigation";
+import { useUser } from "@clerk/nextjs";
+import React from "react";
+import CheckoutDetailsPage from "./details";
+import PaymentPage from "./payment";
+import CompletionPage from "./completion";
 
 const CheckoutWizard = () => {
   const { isLoaded } = useUser();

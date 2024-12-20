@@ -1,18 +1,18 @@
-import React from 'react';
-import StripeProvider from './StripeProvider';
+import React from "react";
+import StripeProvider from "./StripeProvider";
 import {
   PaymentElement,
   useElements,
   useStripe,
-} from '@stripe/react-stripe-js';
-import { useCheckoutNavigation } from '@/hooks/useCheckoutNavigation';
-import { useCurrentCourse } from '@/hooks/useCurrentCourse';
-import { useClerk, useUser } from '@clerk/nextjs';
-import CoursePreview from '@/components/CoursePreview';
-import { CreditCard } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useCreateTransactionMutation } from '@/state/api';
-import { toast } from 'sonner';
+} from "@stripe/react-stripe-js";
+import { useCheckoutNavigation } from "@/hooks/useCheckoutNavigation";
+import { useCurrentCourse } from "@/hooks/useCurrentCourse";
+import { useClerk, useUser } from "@clerk/nextjs";
+import CoursePreview from "@/components/CoursePreview";
+import { CreditCard } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCreateTransactionMutation } from "@/state/api";
+import { toast } from "sonner";
 
 const PaymentPageContent = () => {
   const stripe = useStripe();
@@ -27,7 +27,7 @@ const PaymentPageContent = () => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      toast.error('Stripe service is not available');
+      toast.error("Stripe service is not available");
       return;
     }
 
@@ -42,15 +42,15 @@ const PaymentPageContent = () => {
       confirmParams: {
         return_url: `${baseUrl}/checkout?step=3&id=${courseId}`,
       },
-      redirect: 'if_required',
+      redirect: "if_required",
     });
 
-    if (result.paymentIntent?.status === 'succeeded') {
+    if (result.paymentIntent?.status === "succeeded") {
       const transactionData: Partial<Transaction> = {
         transactionId: result.paymentIntent.id,
         userId: user?.id,
         courseId: courseId,
-        paymentProvider: 'stripe',
+        paymentProvider: "stripe",
         amount: course?.price || 0,
       };
 

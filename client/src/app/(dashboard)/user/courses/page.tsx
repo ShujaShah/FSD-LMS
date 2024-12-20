@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import Toolbar from '@/components/Toolbar';
-import CourseCard from '@/components/CourseCard';
-import { useGetUserEnrolledCoursesQuery } from '@/state/api';
-import { useRouter } from 'next/navigation';
-import Header from '@/components/Header';
-import { useUser } from '@clerk/nextjs';
-import { useState, useMemo } from 'react';
-import Loading from '@/components/Loading';
+import Toolbar from "@/components/Toolbar";
+import CourseCard from "@/components/CourseCard";
+import { useGetUserEnrolledCoursesQuery } from "@/state/api";
+import { useRouter } from "next/navigation";
+import Header from "@/components/Header";
+import { useUser } from "@clerk/nextjs";
+import { useState, useMemo } from "react";
+import Loading from "@/components/Loading";
 
 const Courses = () => {
   const router = useRouter();
   const { user, isLoaded } = useUser();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const {
     data: courses,
     isLoading,
     isError,
-  } = useGetUserEnrolledCoursesQuery(user?.id ?? '', {
+  } = useGetUserEnrolledCoursesQuery(user?.id ?? "", {
     skip: !isLoaded || !user,
   });
 
@@ -31,7 +31,7 @@ const Courses = () => {
         .toLowerCase()
         .includes(searchTerm.toLowerCase());
       const matchesCategory =
-        selectedCategory === 'all' || course.category === selectedCategory;
+        selectedCategory === "all" || course.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [courses, searchTerm, selectedCategory]);
