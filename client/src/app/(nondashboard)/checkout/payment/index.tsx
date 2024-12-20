@@ -40,8 +40,7 @@ const PaymentPageContent = () => {
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // return_url: `${baseUrl}/checkout?step=3&id=${courseId}`,
-        return_url: 'http://localhost:3000/checkout?step=3&id=${courseId}',
+        return_url: `${baseUrl}/checkout?step=3&id=${courseId}`,
       },
       redirect: 'if_required',
     });

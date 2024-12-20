@@ -21,6 +21,7 @@ const NonDashboardNavbar = () => {
               <Link
                 href="/search"
                 className="nondashboard-navbar__search-input"
+                scroll={false}
               >
                 <span className="hidden sm:inline">Search Courses</span>
                 <span className="sm:hidden">Search</span>
