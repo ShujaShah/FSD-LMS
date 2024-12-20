@@ -8,6 +8,8 @@ import * as dynamoose from 'dynamoose';
 import router from './routes';
 import { Request, Response } from 'express';
 import { clerkMiddleware, createClerkClient } from '@clerk/express';
+import serverless from 'serverless-http';
+import seed from './seed/seedDynamodb';
 
 /** CONFIGURATIONS */
 dotenv.config();
@@ -17,9 +19,9 @@ if (!isProduction) {
   dynamoose.aws.ddb.local();
 }
 
-export const clerkClient= createClerkClient({
-  secretKey: process.env.CLERK_SECRET_KEY
-})
+export const clerkClient = createClerkClient({
+  secretKey: process.env.CLERK_SECRET_KEY,
+});
 
 const app = express();
 app.use(express.json());
@@ -28,7 +30,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: false }));
-app.use(clerkMiddleware()); 
+app.use(clerkMiddleware());
 
 /** CORS */
 app.use(
@@ -52,3 +54,17 @@ if (!isProduction) {
     console.log(`Server running on port ${port}`);
   });
 }
+
+/** aws production environment */
+const serverlessApp = serverless(app);
+export const handler = async (event: any, context: any) => {
+  if (event.action === 'seed') {
+    await seed();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'Data seeded successfully' }),
+    };
+  } else {
+    return await serverlessApp(event, context);
+  }
+};
